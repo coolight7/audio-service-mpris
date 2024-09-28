@@ -8,11 +8,12 @@ import 'mpris.dart';
 import 'metadata.dart';
 
 class AudioServiceMpris extends AudioServicePlatform {
+  static String? lyrics;
+
   late final DBusClient _dBusClient;
   late final OrgMprisMediaPlayer2 _mpris;
   AudioHandlerCallbacks? _handlerCallbacks;
   bool _isPlaying = false;
-  String? lyrics;
 
   void _listenToOpenUriStream() {
     _mpris.openUriStream.listen((uri) {
