@@ -12,6 +12,7 @@ class AudioServiceMpris extends AudioServicePlatform {
   late final OrgMprisMediaPlayer2 _mpris;
   AudioHandlerCallbacks? _handlerCallbacks;
   bool _isPlaying = false;
+  String? lyrics;
 
   void _listenToOpenUriStream() {
     _mpris.openUriStream.listen((uri) {
@@ -103,14 +104,15 @@ class AudioServiceMpris extends AudioServicePlatform {
 
     List<String>? genre;
     if (request.mediaItem.genre != null) genre = [request.mediaItem.genre!];
-
     _mpris.metadata = Metadata(
-        title: request.mediaItem.title,
-        length: request.mediaItem.duration,
-        artist: artist,
-        artUrl: request.mediaItem.artUri.toString(),
-        album: request.mediaItem.album,
-        genre: genre);
+      title: request.mediaItem.title,
+      length: request.mediaItem.duration,
+      lyrics: lyrics,
+      artist: artist,
+      artUrl: request.mediaItem.artUri.toString(),
+      album: request.mediaItem.album,
+      genre: genre,
+    );
   }
 
   @override
